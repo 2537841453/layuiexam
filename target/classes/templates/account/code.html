@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>代码修饰器 - layui</title>
+
+<!--<link rel="stylesheet" href="/layui/css/layui.css">-->
+  <link rel="stylesheet" href="../layui/css/layui.css">
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+  <script src="../jquery/jquery-3.4.1.min.js"></script>
+
+<style>
+body{padding: 50px 100px;}
+
+</style>
+</head>
+<form class="layui-form" action="" lay-filter="example" id="te" style="display: none;width: 550px">
+  <div class="layui-form-item" id="id" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="id"  lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+      <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="text" name="sex" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">城市</label>
+    <div class="layui-input-block">
+      <input type="text" name="city" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">标题</label>
+    <div class="layui-input-block">
+      <input type="text" name="titles" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">描述</label>
+    <div class="layui-input-block">
+      <input type="text" name="explains" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="padding: 20px 20px 10px 20px;">
+    <label class="layui-form-label">内容</label>
+    <div class="layui-input-block">
+      <input type="text" name="contents" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <!--<div style="padding: 20px 20px 20px 20px;">
+    <label style="margin-right: 10px; width: 100px;text-align: right;">1239888</label><input type="text"/>
+  </div>-->
+  <div class="layui-btn-group">
+  <button type="submit" class="layui-btn layui-btn-primary">返回</button>
+  <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo11">确认</button>
+  </div>
+</form>
+<body>
+<div class="demoTable">
+  搜索ID：
+  <div class="layui-inline">
+    <input class="layui-input" name="keyword" id="demoReload" autocomplete="off">
+  </div>
+  <button class="layui-btn" data-type="reload">搜索</button>
+  <button class="layui-btn"  data-type="add">添加</button>
+</div>
+<table class="layui-hide" id="test" lay-filter="useruv" style="width: 300px"></table>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script src="../layui/layui.js"></script>
+<script>
+  layui.use(['form','table'], function() {
+    var table = layui.table;
+    var form = layui.form;
+    table.render({
+      elem: '#test'
+      , url: '/code2'
+      , cols: [
+        [
+          {checkbox: true, fixed: true}
+          , {field: 'id', title: 'ID'}
+          , {field: 'username', title: '用户名'}
+          , {field: 'sex', title: '性别'}
+          , {field: 'city', title: '城市'}
+          , {field: 'titles', title: '标题'}
+          , {field: 'explains', title: '描述'}
+          , {field: 'contents', title: '内容'}
+          , {fixed: 'right', width: 150, align: 'center', toolbar: '#barDemo'}
+        ]
+      ]
+      , page: true
+      , id: 'testReload'
+    });
+
+    /*查询表格重载*/
+    var $ = layui.$, active = {
+      reload: function () {
+        var demoReload = $('#demoReload');
+        table.reload('testReload', {
+          url: "/selectById"
+          , methob: "get"
+          , where: {
+            keyword: demoReload.val()
+          }
+        });
+      },
+      add: function(){
+        document.getElementById("id").style.display="none";
+        var that = this;
+        layer.open({
+          type: 1
+          , title: false //不显示标题栏
+          , closeBtn: false
+          , area: '600px;'
+          , shade: 0.8
+          , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+          /* ,btn: ['火速围观', '残忍拒绝']*/
+          , btnAlign: 'c'
+          , moveType: 1 //拖拽模式，0或者1
+          , content: $("#te")
+        });
+        form.on('submit(demo11)', function (message) {
+/*          var field = message.field;*/
+          //获取表单数据
+          var data = form.val('example');
+          console.log(data);
+          $.ajax({
+            url: "/add",
+            type: "post",
+            data:data,
+            dataType:"json",
+        /*    success: function(data){
+              console.log(data.code);
+              if(data.state==1){
+                layer.msg("修改成功", {icon: 6});
+                //同步更新表格和缓存对应的值
+             /!*   obj.update({
+                  username: field.username
+                });*!/
+                /!*table.reload('testReload');*!/
+              }else{
+                layer.msg("修改失败", {icon: 5});
+              }
+            }*/
+          });
+        })
+ /*       $("#withExport").click(function(){
+          var data = form.val('example');
+          layer.msg("点击事件"+data);
+        });*/
+      }
+    };
+    //监听表格复选框选择
+    table.on('checkbox(useruv)', function (obj) {
+      console.log(obj)
+    });
+    //监听工具条
+    table.on('tool(useruv)', function (obj) {
+      var data = obj.data;
+      if (obj.event === 'del') {
+        layer.confirm('真的删除行么', function (index) {
+          console.log(data);
+          $.ajax({
+            url: "/At/delete",
+            type: "POST",
+            data: {"id": data.id},
+            dataType: "json",
+            success: function (data) {
+              if (data.state == 1) {
+                obj.del();
+                layer.close(index);
+                layer.msg("删除成功", {icon: 6});
+              } else {
+                layer.msg("删除失败", {icon: 5});
+              }
+            }
+
+          });
+        });
+      } else if (obj.event === 'edit') {
+        EidtUv(obj,data);
+      }
+    });
+
+    $('.demoTable .layui-btn').on('click', function () {
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+
+    function  EidtUv(obj,data) {
+      form.val('example', {
+        "id": data.id
+        ,"username": data.username // "name": "value"
+        , "sex": data.sex
+        , "city": data.city
+        , "titles": data.titles
+        , "explains": data.explains
+        , "contents": data.contents
+      });
+      layer.open({
+        type: 1
+        , title: false //不显示标题栏
+        , closeBtn: false
+        , area: '600px;'
+        , shade: 0.8
+        , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+       /* ,btn: ['火速围观', '残忍拒绝']*/
+        , btnAlign: 'c'
+        , moveType: 1 //拖拽模式，0或者1
+        , content: $("#te")
+      });
+
+      form.on('submit(demo11)', function (message) {
+        var field = message.field;
+        var data = form.val('example');
+        $.ajax({
+          url: "/At/edit",
+          type: "post",
+          data:field,
+           dataType:"json",
+            success: function(data){
+              console.log(data.code);
+            if(data.state==1){
+                layer.msg("修改成功", {icon: 6});
+              //同步更新表格和缓存对应的值
+              obj.update({
+                username: field.username
+              });
+              layer.close(index);
+            }else{
+              layer.msg("修改失败", {icon: 5});
+            }
+          }
+        });
+      })
+    }
+    //触发事件
+ /*   var active = {
+      add: function(){
+        var that = this;
+        layer.open({
+          type: 1
+          , title: false //不显示标题栏
+          , closeBtn: false
+          , area: '600px;'
+          , shade: 0.8
+          , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                  /!* ,btn: ['火速围观', '残忍拒绝']*!/
+          , btnAlign: 'c'
+          , moveType: 1 //拖拽模式，0或者1
+          , content: $("#te")
+        });
+      }
+    }*/
+    /*function add(){
+      layer.open({
+        type: 1
+        , title: false //不显示标题栏
+        , closeBtn: false
+        , area: '600px;'
+        , shade: 0.8
+        , id: 'LAY_layuipro' //设定一个id，防止重复弹出
+        /!* ,btn: ['火速围观', '残忍拒绝']*!/
+        , btnAlign: 'c'
+        , moveType: 1 //拖拽模式，0或者1
+        , content: $("#te")
+      });
+      $("#withExport").click(function(){
+        var data = form.val('example');
+        layer.msg("点击事件"+data);
+      });
+    }*/
+
+  })
+
+</script>
+</body>
+</html>
