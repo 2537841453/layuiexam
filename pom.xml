@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <name>webexam</name>
     <description>
-        广西盛源行笔试考试基础框架说明-框架整体基于spring boot
         1、jdk1.8
         2、spring boot基础框架
         3、spring mvc模式
@@ -65,17 +64,22 @@
             <version>2.6</version>
         </dependency>
 
-    <!--    分页-->
-       <!-- <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>4.1.3</version>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
         </dependency>
--->
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-all</artifactId>
+            <version>1.2.2</version>
         </dependency>
 
         <dependency>

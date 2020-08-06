@@ -17,4 +17,4 @@ html,body {
 .login h1{ text-align:center; color:#fff; font-size:24px; margin-bottom:20px; }
 .form_code{ position:relative; }
 .form_code .code{ position:absolute; right:0; top:1px; cursor:pointer; }
-.login_btn{ width:100%; }
+.login_btn{ width:30%; }

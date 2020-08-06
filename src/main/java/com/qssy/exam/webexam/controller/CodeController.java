@@ -18,7 +18,6 @@ import java.util.Map;
  * @author zzz
  */
 @Controller
-/*@RequestMapping("At")*/
 public class CodeController {
 
     @Autowired

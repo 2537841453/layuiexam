@@ -1,6 +1,6 @@
 package com.qssy.exam.webexam.entity;
 
-public class Login {
+public class User {
     private Integer id;
     private String username;
     private String password;
