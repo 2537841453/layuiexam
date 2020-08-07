@@ -1,7 +1,7 @@
 package com.qssy.exam.webexam.controller;
 
-import com.qssy.exam.webexam.commom.IVerifyCodeGen;
-import com.qssy.exam.webexam.commom.SimpleCharVerifyCodeGenImpl;
+import com.qssy.exam.webexam.service.IVerifyCodeGen;
+import com.qssy.exam.webexam.service.impl.SimpleCharVerifyCodeGenImpl;
 import com.qssy.exam.webexam.commom.VerifyCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

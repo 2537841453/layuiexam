@@ -19,11 +19,13 @@
 	</select>
     <insert id="addUser" parameterType="user" >
 		INSERT INTO login(
+		  id,
 		  username,
           password,
           salt
 		)
 		VALUES(
+		#{id},
 		#{username},
 		#{password},
 		#{salt}

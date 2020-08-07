@@ -1,4 +1,6 @@
-package com.qssy.exam.webexam.commom;
+package com.qssy.exam.webexam.service;
+
+import com.qssy.exam.webexam.commom.VerifyCode;
 
 import java.io.IOException;
 import java.io.OutputStream;

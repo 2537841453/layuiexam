@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author zzz
@@ -51,10 +52,12 @@ public class CodeController {
         return map;
     }
 
-    @PostMapping("delete")
+    @GetMapping("delete")
     @ResponseBody
-    public JsonToken delete(@RequestParam("id") int id){
+    public JsonToken delete(@RequestParam("id") String id){
+
         int code=codeService.deleteById(id);
+        System.out.println("----------------------删除成功------------------------");
         return new JsonToken(0,"删除成功",code,code>0?true:false);
     }
 
@@ -62,13 +65,13 @@ public class CodeController {
     @ResponseBody
     public JsonToken edit(Code code){
         int codes=codeService.EditById(code.getUsername(),code.getId());
-        //System.out.println(code.getId()+"sfs");
-        return new JsonToken(1);
+        System.out.println("----------------------编辑成功---------------------------");
+        return new JsonToken(1,"编辑成功",codes,0);
     }
 
     @GetMapping("selectById")
     @ResponseBody
-    public Map<String, Object>  selectById(@RequestParam("keyword") int keyword,Integer limit, Integer page){
+    public Map<String, Object>  selectById(@RequestParam("keyword") String keyword,Integer limit, Integer page){
         PageHelper.startPage(page, limit);
         List<Code> code=codeService.selectById(keyword);// 这是我们的sql
         System.out.println(code);
@@ -85,9 +88,12 @@ public class CodeController {
     @RequestMapping("add")
     @ResponseBody
     public JsonToken add(Code code){
+        String id = UUID.randomUUID().toString().replaceAll("-", "");
+        code.setId(id);
+        //System.out.println(code.getId());
         int codes=codeService.adds(code);
-        System.out.println(codes);
-        return new JsonToken(0,"删除成功",codes,codes>0?true:false);
+        System.out.println("-----------------添加成功-------------------");
+        return new JsonToken(0,"添加成功",codes,codes>0?true:false);
     }
 }
 

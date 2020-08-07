@@ -29,18 +29,18 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
-    public int deleteById(int id) {
+    public int deleteById(String id) {
         return codeDao.deleteById(id);
     }
 
     @Override
-    public int EditById(String username, int id) {
+    public int EditById(String username, String id) {
         return codeDao.EditById(username,id);
     }
 
 
     @Override
-    public List<Code> selectById(int id) {
+    public List<Code> selectById(String id) {
         return codeDao.selectById(id);
     }
 

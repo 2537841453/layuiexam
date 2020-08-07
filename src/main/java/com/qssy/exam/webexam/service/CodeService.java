@@ -10,8 +10,8 @@ import java.util.Map;
 public interface CodeService {
     int add(String titles, String explains, String contents);
     List<Code> findAll();
-    int deleteById(int id);
-    int EditById(String username,int id);
-    List<Code> selectById(int id);
+    int deleteById(String id);
+    int EditById(String username,String id);
+    List<Code> selectById(String id);
     int adds(Code code);
 }

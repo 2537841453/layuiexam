@@ -1,16 +1,16 @@
 package com.qssy.exam.webexam.entity;
 
 public class User {
-    private Integer id;
+    private String id;
     private String username;
     private String password;
     private String salt;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

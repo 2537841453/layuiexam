@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * @author zzz
@@ -30,9 +31,13 @@ public class RegistController {
     @ResponseBody
     public JsonToken toRegists(@RequestParam("username") String username, @RequestParam("password") String password) {
 
+       //自动生成主键uuid并去掉“-”
+       String id = UUID.randomUUID().toString().replaceAll("-", "");
+
         User user= userService.findAll(username);
         User user1=new User();
         if(user==null){
+            user1.setId(id);
             user1.setUsername(username);
             user1.setSalt(String.valueOf(new SecureRandomNumberGenerator().nextBytes().toHex()));
             user1.setPassword(String.valueOf(new Md5Hash(password, user1.getSalt(), 3)));

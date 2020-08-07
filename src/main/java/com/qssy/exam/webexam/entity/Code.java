@@ -1,7 +1,7 @@
 package com.qssy.exam.webexam.entity;
 
 public class Code {
-    private Integer id;
+    private String id;
     private String username;
     private String sex;
     private String city;
@@ -9,11 +9,12 @@ public class Code {
     private String explains;
     private String contents;
 
-    public Integer getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
