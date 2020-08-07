@@ -16,7 +16,7 @@
      explains,
      contents
   </sql>
-    <insert id="add" parameterType="list" >
+<!--    <insert id="add" parameterType="list" >
 		INSERT INTO code(
 		titles,
 		explains,
@@ -27,31 +27,32 @@
 		#{explains},
 		#{contents}
 		);
-	</insert>
+	</insert>-->
 
 	<select id="findAll"  parameterType="code" resultType="Code">
 		select <include refid="List" /> from code
 	</select>
 
-    <delete id="deleteById" parameterType="int" >
-    delete from code where id = #{id,jdbcType=INTEGER}
+    <delete id="deleteById" parameterType="code" >
+    delete from code where id = #{id,jdbcType=VARCHAR}
     </delete>
 
     <update id="EditById" parameterType="code" >
         update code
         <set>
-            id = #{id,jdbcType=INTEGER},
+            id = #{id,jdbcType=VARCHAR},
             username= #{username,jdbcType=VARCHAR}
         </set>
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <select id="selectById"  parameterType="code" resultType="Code">
-        select <include refid="List" /> from code where id = #{id,jdbcType=INTEGER}
+        select <include refid="List" /> from code where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <insert id="adds" parameterType="list" >
 		INSERT INTO code(
+		 id,
 		 username,
          sex,
          city,
@@ -60,6 +61,7 @@
          contents
 		)
 		VALUES(
+		#{id,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR},
 		#{sex,jdbcType=VARCHAR},
 		#{city,jdbcType=VARCHAR},
