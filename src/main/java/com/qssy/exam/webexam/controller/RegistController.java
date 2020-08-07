@@ -34,10 +34,10 @@ public class RegistController {
         User user1=new User();
         if(user==null){
             user1.setUsername(username);
-            user1.setSalt(new SecureRandomNumberGenerator().nextBytes().toHex());
+            user1.setSalt(String.valueOf(new SecureRandomNumberGenerator().nextBytes().toHex()));
             user1.setPassword(String.valueOf(new Md5Hash(password, user1.getSalt(), 3)));
-            User user2 = userService.addUser(user1);
-            return new JsonToken(200, "注册账号成功", user2, 0);
+            int user2 = userService.addUser(user1);
+            return new JsonToken(200, "注册账号成功", user1.getPassword(), 0);
         }else {
             return new JsonToken(0,"此账号已被注册",0,0);
         }

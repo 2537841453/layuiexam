@@ -20,13 +20,13 @@
     <insert id="addUser" parameterType="user" >
 		INSERT INTO login(
 		  username,
-          password，
+          password,
           salt
 		)
 		VALUES(
 		#{username},
 		#{password},
-		#{salt},
+		#{salt}
 		);
 	</insert>
 </mapper>

@@ -5,5 +5,5 @@ import com.qssy.exam.webexam.entity.User;
 
 public interface UserService {
     User findAll(String username);
-    User addUser(User user);
+    int addUser(User user);
 }

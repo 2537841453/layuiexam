@@ -37,33 +37,35 @@
 <script type="text/javascript" src="../js/snow_canvas.js"></script>
 
 <script>
-
+    layui.use('layer', function() { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
 
         $("#regist").click(function () {
             $.ajax({
                 url: '/regists',
-                type:'post',
-                dataType:'json',
-                data:{
-                    username:$("#username").val(),
-                    password:$("#password").val(),
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    username: $("#username").val(),
+                    password: $("#password").val(),
                 },
-                success:function (result) {
-                 if(result.code==0){
-                        layer.msg("此账号已被注册，请重新注册",{icon:2,time:2000, shift: 6});
-                 /*       window.location.href = "/main";*/
-                    }else if(result.code==200){
-                        layer.msg("注册成功",{icon:1,time:2000, shift: 6});
-                     /*   window.location.href = "/";*/
+                success: function (result) {
+                    if (result.code == 0) {
+                        layer.msg("此账号已被注册，请重新注册", {icon: 2, time: 2000, shift: 6});
+                        /*       window.location.href = "/main";*/
+                    } else if (result.code == 200) {
+                        layer.msg("注册成功", {icon: 1, time: 2000, shift: 6});
+                        window.location.href = "/";
                     }
                 },
-                error:function (result) {
-                    layer.msg("注册失败",{icon:2,time:2000, shift: 6});
+                error: function (result) {
+                    layer.msg("注册失败", {icon: 2, time: 2000, shift: 6});
                 }
             })
         })
 
-
+    })
 </script>
 </body>
 </html>
